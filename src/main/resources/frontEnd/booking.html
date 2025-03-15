@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip | ExploreLanka</title>
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.4.0/remixicon.css">
+</head>
+<body>
+
+<header id="home">
+    <nav>
+        <div class="nav__bar">
+            <div class="nav__logo"><a href="#">ExploreLanka 🌍</a></div>
+            <ul class="nav__links">
+                <li class="link"><a href="index.html">Home</a></li>
+                <li class="link"><a href="#about">About Us</a></li>
+                <li class="link"><a href="#discover">Discover</a></li>
+                <li class="link"><a href="#journals">Journals</a></li>
+                <li class="link"><a href="#gallery">Gallery</a></li>
+                <li class="link"><a href="#contact">Contact</a></li>
+                <li class="link search">
+                    <span><i class="ri-search-line"></i></span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="section__container header__container">
+        <h1>The new way to plan your next adventure</h1>
+        <h4>Explore the colourful world</h4>
+        <button class="btn">
+            Explore More <i class="ri-arrow-right-line"></i>
+        </button>
+    </div>
+</header>
+
+<h2 class="section__header">Plan Your Perfect Trip with ExploreLanka!</h2>
+<!-- Booking Section -->
+<section class="booking">
+
+    <div class="booking__container">
+        <h2>Book Your Trip Now!</h2>
+        <p>Book your dream trip with us and experience the best of Sri Lanka’s stunning landscapes, rich culture, and warm hospitality.</p>
+
+        <div class="booking__form-container">
+            <form action="#" method="POST" class="booking__form">
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form__group">
+                        <label for="email">Email Address:</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form__group">
+                        <label for="package">Choose Your Package:</label>
+                        <select id="package" name="package" required>
+                            <option value="" disabled selected>Select a package</option>
+                            <option value="budget">Budget Explorer Package</option>
+                            <option value="classic">Classic Sri Lanka Package</option>
+                            <option value="luxury">Luxury Paradise Package</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="date">Select Travel Date:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form__group">
+                        <label for="guests">Number of Guests:</label>
+                        <input type="number" id="guests" name="guests" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label for="message">Additional Requests:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Enter any special requests or preferences"></textarea>
+                </div>
+
+                <div class="form-footer">
+                    <p class="price-info">💵 Secure your booking now for just...</p>
+                    <button type="submit" class="btn">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="booking__info">
+            <h3>📍 Need Help?</h3>
+            <p>Contact our travel experts for personalized recommendations.</p>
+            <p>📞 Hotline: +94 77 726 5746</p>
+            <p>📧 Email: <a href="mailto:info@explorelanka.com">info@explorelanka.com</a></p>
+        </div>
+
+<!--        <p class="note">By submitting this form, you agree to our <a href="#">terms and conditions</a>.</p>-->
+    </div>
+</section>
+
+
+<footer class="footer" id="Footer">
+    <div class="footer__container">
+        <div class="footer__info">
+            <h4>🌍 ExploreLanka</h4>
+            <p>46/26, Navam Mawatha,<br>Colombo 02, Sri Lanka.</p>
+            <p> General: +94 11 234 5700<br> Hotline: +94 77 726 5746 (24/7)</p>
+            <p> Email: <a href="mailto:support@explorelanka.com">support@explorelanka.com</a></p>
+            <p> Opening Hours: Mon - Fri: 9 AM to 5 PM</p>
+        </div>
+
+        <div class="footer__nav">
+            <h5>Quick Links</h5>
+            <ul>
+                <li class="link"><a href="#home">Home</a></li>
+                <li class="link"><a href="#about">About Us</a></li>
+                <li class="link"><a href="#discover">Packages</a></li>
+                <li class="link"><a href="#journals">Journals</a></li>
+                <li class="link"><a href="#gallery">Gallery</a></li>
+                <li class="link"><a href="#Footer">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="footer__family">
+            <h5>🌿 ExploreLanka Family</h5>
+            <ul>
+                <li><a href="#">🏨 ExploreLanka Hotels</a></li>
+                <li><a href="#">✈️ Sri Lanka Tailor-Made</a></li>
+                <li><a href="#">🚗 ExploreLanka Journeys</a></li>
+            </ul>
+        </div>
+
+        <div class="footer__newsletter">
+            <h5>📩 Subscribe to Our Newsletter</h5>
+            <form action="#">
+                <input type="email" placeholder="Enter your email here" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+
+        <div class="footer__socials">
+            <h5>📱 Follow Us</h5>
+            <div class="social-icons">
+                <a href="#"><i class="ri-facebook-fill"></i></a>
+                <a href="#"><i class="ri-instagram-fill"></i></a>
+                <a href="#"><i class="ri-twitter-fill"></i></a>
+                <a href="#"><i class="ri-linkedin-fill"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer__bar">
+        <p>© 2025 ExploreLanka, All Rights Reserved</p>
+        <ul>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#terms-conditions">Terms & Conditions</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
