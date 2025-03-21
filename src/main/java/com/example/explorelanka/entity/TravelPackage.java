@@ -2,28 +2,41 @@ package com.example.explorelanka.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "packages")
-public class Package {
+public class TravelPackage  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private String duration;
 
-    public Package(Long id, String name, String description, BigDecimal price, String duration) {
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false, length = 1000)
+    private String description;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private String duration; // e.g., "5 Days 4 Nights"
+
+    @Column
+    private String image;
+
+    public TravelPackage(Long id, String name, String description, BigDecimal price, String duration) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.duration = duration;
+        this.image = image;
     }
 
-    public Package() {}
+    public TravelPackage() {}
 
     public Long getId() {
         return id;
@@ -65,6 +78,14 @@ public class Package {
         this.duration = duration;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "Package{" +
@@ -73,6 +94,7 @@ public class Package {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", duration='" + duration + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

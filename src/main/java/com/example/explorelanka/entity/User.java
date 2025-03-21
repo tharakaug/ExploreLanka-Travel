@@ -11,7 +11,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "systemuser")
 
-public class User implements Serializable {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uid;

@@ -7,7 +7,8 @@ public class PackageDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private String duration; // e.g., "5 Days 4 Nights"
+    private String duration;// e.g., "5 Days 4 Nights"
+    private String image;
 
     public PackageDTO(Long id, String name, String description, BigDecimal price, String duration) {
         this.id = id;
@@ -15,6 +16,7 @@ public class PackageDTO {
         this.description = description;
         this.price = price;
         this.duration = duration;
+        this.image = image;
     }
 
     public PackageDTO() {
@@ -60,6 +62,14 @@ public class PackageDTO {
         this.duration = duration;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "PackageDTO{" +
@@ -68,6 +78,7 @@ public class PackageDTO {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", duration='" + duration + '\'' +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

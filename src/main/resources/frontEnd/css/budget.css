@@ -42,7 +42,7 @@ h2 {
 /* Hero Section */
 header {
     background-image: linear-gradient(to top, var(--primary-color), transparent),
-    url("../assets/gallery-5.jpg");
+    url("../assets/gallery1.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;

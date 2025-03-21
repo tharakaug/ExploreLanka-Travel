@@ -4,29 +4,32 @@ import com.example.explorelanka.dto.AuthDTO;
 import com.example.explorelanka.dto.ResponseDTO;
 import com.example.explorelanka.dto.UserDTO;
 import com.example.explorelanka.service.UserService;
+import com.example.explorelanka.service.impl.UserServiceImpl;
 import com.example.explorelanka.util.JwtUtil;
 import com.example.explorelanka.util.VarList;
 import jakarta.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
+    private final UserServiceImpl userServiceImpl;
 
-    //constructor injection
-    public UserController(UserService userService, JwtUtil jwtUtil) {
+    // Constructor Injection
+    public UserController(UserService userService ,JwtUtil jwtUtil, UserServiceImpl userServiceImpl) {
         this.userService = userService;
+        this.userServiceImpl = userServiceImpl;
         this.jwtUtil = jwtUtil;
     }
-    @PostMapping(value = "/register")
+
+    // Register User
+    @PostMapping("/register")
     public ResponseEntity<ResponseDTO> registerUser(@RequestBody @Valid UserDTO userDTO) {
         try {
             int res = userService.saveUser(userDTO);
@@ -54,4 +57,56 @@ public class UserController {
         }
     }
 
+    // Search User by Email
+    @GetMapping("/search/{email}")
+    public ResponseEntity<ResponseDTO> searchUser(@PathVariable String email) {
+        try {
+            UserDTO userDTO = userService.searchUser(email);
+            if (userDTO != null) {
+                return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Found", userDTO));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "User Not Found", null));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
+
+    // Delete User by Email
+    @DeleteMapping("/delete/{email}")
+    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String email) {
+        try {
+            userServiceImpl.deleteUser(email);
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Deleted Successfully", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
+
+    // Update User Role
+    @PutMapping("/updateRole")
+    public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String newRole) {
+        try {
+            userService.updateUserRole(email, newRole);
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Role Updated Successfully", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
+
+    // Get All Users
+    @GetMapping("/all")
+    public ResponseEntity<ResponseDTO> getAllUsers() {
+        try {
+            List<UserDTO> users = userService.getAll();
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User List Retrieved", users));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
 }
