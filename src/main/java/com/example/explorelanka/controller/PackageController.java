@@ -18,11 +18,9 @@ public class PackageController {
 
     private final PackageService packageService;
 
-    private final PackageServiceImpl packageServiceImpl;
 
     public PackageController(PackageService packageService, PackageServiceImpl packageServiceImpl) {
         this.packageService = packageService;
-        this.packageServiceImpl = packageServiceImpl;
     }
 
     @PostMapping(value = "/save")
@@ -34,6 +32,7 @@ public class PackageController {
     }
 
     @PutMapping(value = "/update/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDTO> updatePackage(@PathVariable Long id, @RequestBody @Valid PackageDTO packageDTO) {
         packageService.updatePackage(id, packageDTO);
         return ResponseEntity.status(HttpStatus.OK)
@@ -45,5 +44,20 @@ public class PackageController {
     public ResponseEntity<ResponseDTO> getAllPackages() {
         return ResponseEntity.ok(new ResponseDTO(VarList.OK, "Package List Retrieved", packageService.getAllPackages()));
     }
+
+    @DeleteMapping(value = "/delete/{id}")
+    @PreAuthorize("hasAuthority('USER')")
+    public ResponseEntity<ResponseDTO> deletePackage(@PathVariable String id) {
+        System.out.println("nvcwywekj");
+        try {
+            packageService.deletePackage(Long.valueOf(id));
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK, "Package Deleted Successfully", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, "Error deleting package: " + e.getMessage(), null));
+        }
+    }
+
 
 }

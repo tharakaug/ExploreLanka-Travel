@@ -1,20 +1,25 @@
 package com.example.explorelanka.dto;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class BookingDTO {
     private Long id;
-    private Long userId;
+    private UUID userId;
     private Long packageId;
+    private String userName;
+    private String userEmail;
     private LocalDate travelDate;
     private int numberOfGuests;
     private String additionalRequests;
     private String status; // e.g., "PENDING", "CONFIRMED", "CANCELLED"
 
-    public BookingDTO(Long id, Long userId, Long packageId, LocalDate travelDate, int numberOfGuests, String additionalRequests, String status) {
+    public BookingDTO(Long id, UUID userId, Long packageId, String userName, String userEmail, LocalDate travelDate, int numberOfGuests, String additionalRequests, String status) {
         this.id = id;
         this.userId = userId;
         this.packageId = packageId;
+        this.userName = userName;
+        this.userEmail = userEmail;
         this.travelDate = travelDate;
         this.numberOfGuests = numberOfGuests;
         this.additionalRequests = additionalRequests;
@@ -31,11 +36,27 @@ public class BookingDTO {
         this.id = id;
     }
 
-    public Long getUserId() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 
@@ -85,6 +106,8 @@ public class BookingDTO {
                 "id=" + id +
                 ", userId=" + userId +
                 ", packageId=" + packageId +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
                 ", travelDate=" + travelDate +
                 ", numberOfGuests=" + numberOfGuests +
                 ", additionalRequests='" + additionalRequests + '\'' +

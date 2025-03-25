@@ -20,15 +20,21 @@ public class Booking  {
     @ManyToOne
     @JoinColumn(name = "package_id", nullable = false)
     private TravelPackage travelPackage;
+    private String userName;
+    private String userEmail;
 
     private LocalDate travelDate;
     private int numberOfGuests;
     private String additionalRequests;
 
-    @Column(nullable = false)
-    private String status; // "PENDING", "CONFIRMED", "CANCELLED"
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
 
-    public Booking(Long id, User user, TravelPackage travelPackage, LocalDate travelDate, int numberOfGuests, String additionalRequests, String status) {
+    public enum BookingStatus {
+        PENDING, CONFIRMED, CANCELLED
+    }
+
+    public Booking(Long id, User user, TravelPackage travelPackage, String userName, String userEmail, LocalDate travelDate, int numberOfGuests, String additionalRequests, BookingStatus status) {
         this.id = id;
         this.user = user;
         this.travelPackage = travelPackage;
@@ -36,6 +42,8 @@ public class Booking  {
         this.numberOfGuests = numberOfGuests;
         this.additionalRequests = additionalRequests;
         this.status = status;
+        this.userName = userName;
+        this.userEmail = userEmail;
     }
 
     public Booking() {}
@@ -46,6 +54,22 @@ public class Booking  {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public User getUser() {
@@ -88,11 +112,11 @@ public class Booking  {
         this.additionalRequests = additionalRequests;
     }
 
-    public String getStatus() {
+    public BookingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) {
         this.status = status;
     }
 
@@ -102,6 +126,8 @@ public class Booking  {
                 "id=" + id +
                 ", user=" + user +
                 ", travelPackage=" + travelPackage +
+                ", userName='" + userName + '\'' +
+                ", userEmail='" + userEmail + '\'' +
                 ", travelDate=" + travelDate +
                 ", numberOfGuests=" + numberOfGuests +
                 ", additionalRequests='" + additionalRequests + '\'' +

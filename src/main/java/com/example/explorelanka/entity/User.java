@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,12 +22,16 @@ public class User  {
     private String name;
     private String role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Booking> bookings;
+
     public User(UUID uid, String email, String password, String name, String role) {
         this.uid = uid;
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
+        this.bookings = bookings;
     }
 
     public User(){}
@@ -63,6 +68,14 @@ public class User  {
         this.name = name;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     public String getRole() {
         return role;
     }
@@ -79,6 +92,7 @@ public class User  {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", role='" + role + '\'' +
+                ", bookings=" + bookings +
                 '}';
     }
 }

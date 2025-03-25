@@ -51,7 +51,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDTO searchUser(String username) {
         if (userRepository.existsByEmail(username)) {
+            System.out.println("search"+username);
             User user=userRepository.findByEmail(username);
+            System.out.println("search"+user.getEmail());
             return modelMapper.map(user,UserDTO.class);
         } else {
             return null;
@@ -86,13 +88,22 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public void updateUserRole(String email, String newRole) {
         User user = userRepository.findByEmail(String.valueOf(email));
 
-        user.setRole(newRole); // Update only the role
-        userRepository.save(user); // Save the updated user
+        user.setRole(newRole);
+        userRepository.save(user);
+    }
+    @Override
+    public UserDTO findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        System.out.println(user.getEmail());
+        System.out.println(user.getUid());
+        System.out.println(user.getBookings());
+        return modelMapper.map(user,UserDTO.class);
     }
 
     @Override
     public List<UserDTO> getAll() {
         return modelMapper.map(userRepository.findAll(),new TypeToken<List<UserDTO>>() {}.getType());
     }
+
 
 }

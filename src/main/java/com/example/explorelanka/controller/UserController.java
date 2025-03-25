@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
@@ -21,14 +22,13 @@ public class UserController {
     private final JwtUtil jwtUtil;
     private final UserServiceImpl userServiceImpl;
 
-    // Constructor Injection
+
     public UserController(UserService userService ,JwtUtil jwtUtil, UserServiceImpl userServiceImpl) {
         this.userService = userService;
         this.userServiceImpl = userServiceImpl;
         this.jwtUtil = jwtUtil;
     }
 
-    // Register User
     @PostMapping("/register")
     public ResponseEntity<ResponseDTO> registerUser(@RequestBody @Valid UserDTO userDTO) {
         try {
@@ -57,24 +57,7 @@ public class UserController {
         }
     }
 
-    // Search User by Email
-    @GetMapping("/search/{email}")
-    public ResponseEntity<ResponseDTO> searchUser(@PathVariable String email) {
-        try {
-            UserDTO userDTO = userService.searchUser(email);
-            if (userDTO != null) {
-                return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Found", userDTO));
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body(new ResponseDTO(VarList.Not_Found, "User Not Found", null));
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
-        }
-    }
 
-    // Delete User by Email
     @DeleteMapping("/delete/{email}")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String email) {
         try {
@@ -86,7 +69,6 @@ public class UserController {
         }
     }
 
-    // Update User Role
     @PutMapping("/updateRole")
     public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String newRole) {
         try {
@@ -98,7 +80,6 @@ public class UserController {
         }
     }
 
-    // Get All Users
     @GetMapping("/all")
     public ResponseEntity<ResponseDTO> getAllUsers() {
         try {

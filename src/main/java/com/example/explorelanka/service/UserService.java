@@ -11,5 +11,7 @@ public interface UserService {
     void deleteUser(String email);
     void updateUserRole(String email, String newRole);
 
+    UserDTO findByEmail(String email);
+
     List<UserDTO> getAll();
 }

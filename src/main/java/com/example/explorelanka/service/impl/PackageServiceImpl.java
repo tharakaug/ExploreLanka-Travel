@@ -28,11 +28,6 @@ public class PackageServiceImpl implements PackageService {
     }
 
     @Override
-    public void getPackageById(Long id) {
-
-    }
-
-    @Override
     public List<PackageDTO> getAllPackages() {
         return modelMapper.map(packageRepository.findAll(),new TypeToken<List<PackageDTO>>() {}.getType());
 
