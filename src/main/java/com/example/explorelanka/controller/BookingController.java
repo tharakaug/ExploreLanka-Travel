@@ -26,8 +26,6 @@ public class BookingController {
     private final BookingService bookingService;
     @Autowired
     private final BookingServiceImpl bookingServiceImpl;
-    @Autowired
-    UserServiceImpl userServiceImpl;
 
     public BookingController(BookingService bookingService, BookingServiceImpl bookingServiceImpl) {
         this.bookingService = bookingService;
@@ -37,33 +35,8 @@ public class BookingController {
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDTO> save(@Valid @RequestBody BookingDTO bookingDTO) {
-//        UserDTO userDTO = userServiceImpl.findByEmail(bookingDTO.getUserEmail());
-//        if (userDTO == null) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                    .body(new ResponseDTO(VarList.Bad_Request, "User Not Found", null));
-//        }
-//
-//        bookingService.save(bookingDTO);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(new ResponseDTO(VarList.OK, "Booking Saved Successfully", null));
-/*
-        if (bookingDTO.getUserEmail() == null || bookingDTO.getUserEmail().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseDTO(VarList.Bad_Request, "User email is required", null));
-        }
 
-        UserDTO userDTO = userServiceImpl.findByEmail(bookingDTO.getUserEmail());
-        if (userDTO == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseDTO(VarList.Bad_Request, "User not found", null));
-        }*/
-
-/*
-        System.out.println(bookingDTO.getUserId());
         bookingService.save(bookingDTO);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseDTO(VarList.OK, "Booking saved successfully", null));*/
-        bookingServiceImpl.save(bookingDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Booking Saved Successfully", null));
 

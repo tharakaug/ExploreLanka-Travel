@@ -10,7 +10,7 @@ public class PackageDTO {
     private String duration;// e.g., "5 Days 4 Nights"
     private String image;
 
-    public PackageDTO(Long id, String name, String description, BigDecimal price, String duration) {
+    public PackageDTO(Long id, String name, String description, BigDecimal price, String duration, String image) {
         this.id = id;
         this.name = name;
         this.description = description;

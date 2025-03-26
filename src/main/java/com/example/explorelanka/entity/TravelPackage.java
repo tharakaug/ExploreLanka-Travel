@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "packages")
@@ -27,7 +28,10 @@ public class TravelPackage  {
     @Column
     private String image;
 
-    public TravelPackage(Long id, String name, String description, BigDecimal price, String duration) {
+    @OneToMany(mappedBy = "travelPackage", cascade = CascadeType.ALL)
+    private List<Booking> bookings;
+
+    public TravelPackage(Long id, String name, String description, BigDecimal price, String duration, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -78,6 +82,14 @@ public class TravelPackage  {
         this.duration = duration;
     }
 
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
     public String getImage() {
         return image;
     }
@@ -94,6 +106,7 @@ public class TravelPackage  {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", duration='" + duration + '\'' +
+                ", bookings=" + bookings +
                 ", image='" + image + '\'' +
                 '}';
     }

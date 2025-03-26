@@ -47,10 +47,9 @@ public class PackageController {
 
     @DeleteMapping(value = "/delete/{id}")
     @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<ResponseDTO> deletePackage(@PathVariable String id) {
-        System.out.println("nvcwywekj");
+    public ResponseEntity<ResponseDTO> deletePackage(@PathVariable Long id) {
         try {
-            packageService.deletePackage(Long.valueOf(id));
+            packageService.deletePackage(id);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseDTO(VarList.OK, "Package Deleted Successfully", null));
         } catch (Exception e) {

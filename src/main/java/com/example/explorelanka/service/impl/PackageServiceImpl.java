@@ -35,7 +35,12 @@ public class PackageServiceImpl implements PackageService {
 
     @Override
     public void updatePackage(Long id, PackageDTO packageDTO) {
-
+        TravelPackage existingPackage = packageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Package not found."));
+        existingPackage.setName(packageDTO.getName());
+        existingPackage.setDescription(packageDTO.getDescription());
+        existingPackage.setPrice(packageDTO.getPrice());
+        packageRepository.save(existingPackage);
     }
 
     @Override

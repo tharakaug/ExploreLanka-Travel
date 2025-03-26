@@ -25,13 +25,13 @@ public class User  {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
+
     public User(UUID uid, String email, String password, String name, String role) {
         this.uid = uid;
         this.email = email;
         this.password = password;
         this.name = name;
         this.role = role;
-        this.bookings = bookings;
     }
 
     public User(){}

@@ -3,12 +3,14 @@ package com.example.explorelanka.repo;
 import com.example.explorelanka.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User,String> {
+import java.util.UUID;
 
-    User findByEmail(String userName);
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-    boolean existsByEmail(String userName);
+    User findByEmail(String email);
 
-    int deleteByEmail(String userName);
+    boolean existsByEmail(String email);
+
+    int deleteByEmail(String email);
 
 }
