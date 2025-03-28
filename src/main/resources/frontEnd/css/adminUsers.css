@@ -30,10 +30,13 @@
     font-size: 18px;
     display: block;
 }
-
-.sidebar ul li a.active {
+.sidebar ul li:hover {
     background: #0056b3;
 }
+
+/*.sidebar ul li a.active {*/
+/*    background: #0056b3;*/
+/*}*/
 
 /* Main Content */
 .main-content {

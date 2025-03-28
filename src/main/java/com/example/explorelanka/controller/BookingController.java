@@ -23,9 +23,9 @@ import java.util.List;
 @RequestMapping("/bookings")
 public class BookingController {
     @Autowired
-    private final BookingService bookingService;
+    private BookingService bookingService;
     @Autowired
-    private final BookingServiceImpl bookingServiceImpl;
+    private BookingServiceImpl bookingServiceImpl;
 
     public BookingController(BookingService bookingService, BookingServiceImpl bookingServiceImpl) {
         this.bookingService = bookingService;
@@ -33,17 +33,13 @@ public class BookingController {
     }
 
     @PostMapping("/save")
-    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDTO> save(@Valid @RequestBody BookingDTO bookingDTO) {
-
-        bookingService.save(bookingDTO);
+        bookingServiceImpl.save(bookingDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Booking Saved Successfully", null));
-
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDTO> getAllBookings() {
         List<BookingDTO> bookingList = bookingService.getAll();
         if (bookingList.isEmpty()) {
@@ -55,7 +51,6 @@ public class BookingController {
     }
 
     @DeleteMapping("/delete/{id}")
-    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<ResponseDTO> deleteBooking(@PathVariable Long id) {
         bookingService.delete(id);
         return ResponseEntity.status(HttpStatus.OK)

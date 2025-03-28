@@ -34,12 +34,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
+
     public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
-        return modelMapper.map(user,UserDTO.class);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + username);
+        }
+        return modelMapper.map(user, UserDTO.class);
     }
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
@@ -86,18 +93,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
     @Override
     public void updateUserRole(String email, String newRole) {
-        User user = userRepository.findByEmail(String.valueOf(email));
-
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new RuntimeException("User not found with email: " + email);
+        }
         user.setRole(newRole);
         userRepository.save(user);
     }
     @Override
     public UserDTO findByEmail(String email) {
+
         User user = userRepository.findByEmail(email);
-        System.out.println(user.getEmail());
-        System.out.println(user.getUid());
-        System.out.println(user.getBookings());
-        return modelMapper.map(user,UserDTO.class);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+        return modelMapper.map(user, UserDTO.class);
     }
 
     @Override

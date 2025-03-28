@@ -24,15 +24,17 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
-    @Autowired
-    private PackageRepository packageRepository;
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PackageRepository travelPackageRepository;
+
     @Autowired
     private ModelMapper modelMapper;
 
     private static final Logger logger = Logger.getLogger(BookingServiceImpl.class.getName());
-
 
     @Override
     public void save(BookingDTO bookingDTO) {
@@ -43,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
             throw new RuntimeException("User not found");
         }
 
-        TravelPackage travelPackage = packageRepository.findById(bookingDTO.getPackageId())
+        TravelPackage travelPackage = travelPackageRepository.findById(bookingDTO.getPackageId())
                 .orElseThrow(() -> new RuntimeException("Package not found"));
 
         Booking booking = modelMapper.map(bookingDTO, Booking.class);
@@ -59,6 +61,7 @@ public class BookingServiceImpl implements BookingService {
     public List<BookingDTO> getAll() {
         return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>(){}.getType());
     }
+
     @Override
     public void save(Booking booking) {
         bookingRepository.save(booking);
@@ -67,7 +70,6 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingDTO> getByUserId(Long userId) {
         return modelMapper.map(bookingRepository.findById(userId), new TypeToken<List<BookingDTO>>(){}.getType());
-
     }
 
     @Override
@@ -79,7 +81,6 @@ public class BookingServiceImpl implements BookingService {
     public void update(Long id, BookingDTO bookingDTO) {
         Booking existingBooking = bookingRepository.findById(id).orElseThrow(() -> new RuntimeException("Booking not found."));
         existingBooking.setStatus(Booking.BookingStatus.valueOf(bookingDTO.getStatus()));
-
         bookingRepository.save(existingBooking);
     }
 

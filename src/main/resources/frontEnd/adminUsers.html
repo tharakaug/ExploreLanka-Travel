@@ -37,12 +37,16 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Username</th>
+                <th>Name</th>
                 <th>Email</th>
+                <th>Password</th>
                 <th>Role</th>
                 <th>Actions</th>
             </tr>
             </thead>
+            <tbody id="tbluser">
+
+            </tbody>
 <!--            <tbody>-->
 <!--            <tr>-->
 <!--                <td>#101</td>-->
@@ -102,6 +106,69 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        let users = [];
+
+        // Fetch and display packages
+        $.ajax({
+            url: "http://localhost:8080/api/v1/user/all",
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            contentType: "application/json",
+            success: (res) => {
+                users = res.data;  // Assign data globally
+
+                let table = $('#tbluser');
+                table.empty();
+                users.forEach((user) => {
+                    table.append(`
+                    <tr data-id="${user.id}">
+                        <td>${user.uid}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.password}</td>
+                        <td>${user.role}</td>
+                        <td>
+<!--                            <button class="btn btn-warning btn-sm edit-btn" >Edit</button>-->
+                            <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `);
+                });
+                $('.delete-btn').click(function () {
+                    const userEmail = $(this).closest('tr').data('email');
+                    deleteUser(userEmail);
+                });
+            }
+        });
+        function deleteUser(email) {
+            if (confirm("Are you sure you want to delete this package?")) {
+                $.ajax({
+                    url: `http://localhost:8080/api/v1/user/delete/${email}`,
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    contentType: "application/json",
+                    success: (res) => {
+                        alert("Package deleted successfully.");
+                        location.reload();  // Reload the page to see the changes
+                    },
+                    error: (error) => {
+                        console.error(error);
+                        alert("Something went wrong while deleting the package.");
+                    }
+                });
+            }
+        }
+
+    });
+</script>
 </body>
 </html>
