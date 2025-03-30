@@ -42,7 +42,7 @@ body {
 
 header {
     background-image: linear-gradient(to top, var(--primary-color), transparent),
-    url("../assets/gallery1.jpg");
+    url("../assets/h6.webp");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;

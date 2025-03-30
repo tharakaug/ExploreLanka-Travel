@@ -42,7 +42,7 @@ h2 {
 /* Hero Section */
 header {
     background-image: linear-gradient(to top, var(--primary-color), transparent),
-    url("../assets/gallery1.jpg");
+    url("../assets/h3.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -622,7 +622,7 @@ ul li:hover {
 
 .gallery__image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     transition: transform 0.3s ease;
 }

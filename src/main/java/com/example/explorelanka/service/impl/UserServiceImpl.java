@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 
 @Service
@@ -68,13 +69,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public void deleteUser(String email) {
-        if (!userRepository.existsByEmail(email)) {
+    public void deleteUser(UUID id) {
+        if (!userRepository.existsById(id)) {
             throw new RuntimeException("User not found");
 
         }
-        userRepository.deleteByEmail(email);
-
+        userRepository.deleteById(id);
     }
 
     @Override

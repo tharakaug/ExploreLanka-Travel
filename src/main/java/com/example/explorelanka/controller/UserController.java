@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -58,27 +59,24 @@ public class UserController {
     }
 
 
-    @DeleteMapping("/delete/{email}")
-    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable String email) {
-        try {
-            userServiceImpl.deleteUser(email);
-            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Deleted Successfully", null));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
-        }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable UUID id) {
+       userServiceImpl.deleteUser(id);
+       return ResponseEntity.status(HttpStatus.OK)
+               .body(new ResponseDTO(VarList.OK, "User Deleted Successfully", null));
+
     }
 
-    @PutMapping("/updateRole")
-    public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String newRole) {
-        try {
-            userService.updateUserRole(email, newRole);
-            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Role Updated Successfully", null));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
-        }
-    }
+//    @PutMapping("/updateRole")
+//    public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String newRole) {
+//        try {
+//            userService.updateUserRole(email, newRole);
+//            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Role Updated Successfully", null));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+//        }
+//    }
 
     @GetMapping("/all")
     public ResponseEntity<ResponseDTO> getAllUsers() {

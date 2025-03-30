@@ -70,7 +70,7 @@ body {
 
 header {
     background-image: linear-gradient(to top, var(--primary-color), transparent),
-    url("../assets/header.jpg");
+    url("../assets/h1.jpg");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -274,7 +274,7 @@ nav {
     text-align: center;
     font-size: 10rem;
     font-weight: 700;
-    background-image: url("../assets/banner.jpg");
+    background-image: url("../assets/g3.jpg");
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px var(--extra-light);
@@ -282,7 +282,7 @@ nav {
 
 /* Gallery Section */
 .gallery {
-    padding: 60px 20px;
+    padding: 0px 20px;
     background-color: #0a0d14;
     text-align: center;
 }
@@ -318,7 +318,7 @@ nav {
 
 .gallery__image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     transition: transform 0.3s ease;
 }
