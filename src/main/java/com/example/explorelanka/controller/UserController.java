@@ -10,6 +10,7 @@ import com.example.explorelanka.util.VarList;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class UserController {
                     AuthDTO authDTO = new AuthDTO();
                     authDTO.setEmail(userDTO.getEmail());
                     authDTO.setToken(token);
+                    authDTO.setRole(userDTO.getRole());
                     return ResponseEntity.status(HttpStatus.CREATED)
                             .body(new ResponseDTO(VarList.Created, "Success", authDTO));
                 }
@@ -59,7 +61,9 @@ public class UserController {
     }
 
 
+
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable UUID id) {
        userServiceImpl.deleteUser(id);
        return ResponseEntity.status(HttpStatus.OK)
@@ -79,6 +83,7 @@ public class UserController {
 //    }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> getAllUsers() {
         try {
             List<UserDTO> users = userService.getAll();

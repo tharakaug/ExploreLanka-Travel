@@ -38,28 +38,29 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void save(BookingDTO bookingDTO) {
-        logger.info("Saving BookingDTO: " + bookingDTO);
+        System.out.println("save booking");
 
-        User user = userRepository.findByEmail(bookingDTO.getUserEmail());
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
+        TravelPackage travelPackage = modelMapper.map(bookingDTO.getTravelPackage(), TravelPackage.class);
+        User user = modelMapper.map(bookingDTO.getUser(), User.class);
 
-        TravelPackage travelPackage = travelPackageRepository.findById(bookingDTO.getPackageId())
-                .orElseThrow(() -> new RuntimeException("Package not found"));
-
-        Booking booking = modelMapper.map(bookingDTO, Booking.class);
+        Booking booking = new Booking();
         booking.setUser(user);
         booking.setTravelPackage(travelPackage);
-
-        logger.info("Mapped Booking entity: " + booking);
+        booking.setStatus(bookingDTO.getStatus());
+        booking.setAdditionalRequests(bookingDTO.getAdditionalRequests());
+        booking.setNumberOfGuests(bookingDTO.getNumberOfGuests());
+        booking.setTravelDate(bookingDTO.getTravelDate());
+        booking.setUserEmail(bookingDTO.getUserEmail());
+        booking.setUserName(bookingDTO.getUser().getName());
         bookingRepository.save(booking);
-        logger.info("Booking saved successfully");
+
     }
 
     @Override
     public List<BookingDTO> getAll() {
-        return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>(){}.getType());
+        List<Booking> bookings = bookingRepository.findAll();
+
+        return modelMapper.map(bookings, new TypeToken<List<BookingDTO>>(){}.getType());
     }
 
     @Override
@@ -80,7 +81,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public void update(Long id, BookingDTO bookingDTO) {
         Booking existingBooking = bookingRepository.findById(id).orElseThrow(() -> new RuntimeException("Booking not found."));
-        existingBooking.setStatus(Booking.BookingStatus.valueOf(bookingDTO.getStatus()));
+        existingBooking.setStatus(Booking.BookingStatus.valueOf(String.valueOf(bookingDTO.getStatus())));
         bookingRepository.save(existingBooking);
     }
 

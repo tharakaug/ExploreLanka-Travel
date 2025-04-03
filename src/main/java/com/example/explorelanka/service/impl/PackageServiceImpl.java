@@ -34,7 +34,7 @@ public class PackageServiceImpl implements PackageService {
     }
 
     @Override
-    public void updatePackage(Long id, PackageDTO packageDTO) {
+    public void updatePackage(String id, PackageDTO packageDTO) {
         TravelPackage existingPackage = packageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Package not found."));
         existingPackage.setName(packageDTO.getName());
@@ -44,7 +44,15 @@ public class PackageServiceImpl implements PackageService {
     }
 
     @Override
-    public void deletePackage(Long id) {
+    public void deletePackage(String id) {
         packageRepository.deleteById(id);
     }
+
+    @Override
+    public PackageDTO getPackageByName(String name) {
+        TravelPackage packaage = packageRepository.findByName(name);
+        return modelMapper.map(packaage, PackageDTO.class);
+    }
+
+
 }

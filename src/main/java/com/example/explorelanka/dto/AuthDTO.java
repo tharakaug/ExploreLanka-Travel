@@ -1,40 +1,19 @@
 package com.example.explorelanka.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Component
 public class AuthDTO {
     private String email;
     private String token;
+    private String role;
 
-    public AuthDTO(String email, String token) {
-        this.email = email;
-        this.token = token;
-    }
-    public AuthDTO() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthDTO{" +
-                "email='" + email + '\'' +
-                ", token='" + token + '\'' +
-                '}';
-    }
 }

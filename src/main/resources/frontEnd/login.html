@@ -101,13 +101,14 @@
                 }),
                 success: (res) => {
                     console.log(res.data.token);
+                    console.log(res.data.role)
                     window.localStorage.setItem("token", res.data.token);
-                    if (res.message === "Success") {
+                    if (res.data.role === "USER") {
                         window.location.href = "index.html";
                         console.log("Login successful");
                         alert("Login successful");
                     } else {
-                        alert("Failed: " + (res.message || "Unknown error"));
+                        window.location.href = "adminDashboard.html";
                     }
                 },
                 error: (error) => {

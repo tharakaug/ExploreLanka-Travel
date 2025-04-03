@@ -16,7 +16,7 @@
         <li><a href="adminDashboard.html">Dashboard</a></li>
         <li><a href="adminUsers.html">Users</a></li>
         <li><a href="adminPackage.html" class="active">Packages</a></li>
-        <li><a href="#">Bookings</a></li>
+        <li><a href="adminBooking.html" class="active">Bookings</a></li>
         <li><a href="#">Payments</a></li>
         <li><a href="#">Weather Alerts</a></li>
         <li><a href="#">Reports</a></li>
@@ -41,7 +41,7 @@
                 <th>Duration</th>
                 <th>Description</th>
                 <th>Price$</th>
-                <th>Image</th>
+<!--                <th>Image</th>-->
                 <th>Actions</th>
             </tr>
             </thead>
@@ -78,10 +78,10 @@
                         <label for="packageDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="packageDescription" rows="3" required></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label for="packageImage" class="form-label">Package Image</label>
-                        <input type="file" class="form-control" id="packageImage" accept="image/*" required>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="packageImage" class="form-label">Package Image</label>-->
+<!--                        <input type="file" class="form-control" id="packageImage" accept="image/*" required>-->
+<!--                    </div>-->
                     <button type="submit" class="btn btn-primary">Add Package</button>
                 </form>
             </div>
@@ -116,10 +116,10 @@
                         <label for="editPackageDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="editPackageDescription" rows="3" required></textarea>
                     </div>
-                    <div class="mb-3">
-                        <label for="editPackageImage" class="form-label">Package Image</label>
-                        <input type="file" class="form-control" id="editPackageImage" accept="image/*" required>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="editPackageImage" class="form-label">Package Image</label>-->
+<!--                        <input type="file" class="form-control" id="editPackageImage" accept="image/*" required>-->
+<!--                    </div>-->
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
@@ -154,7 +154,7 @@
                         <td>${package.duration}</td>
                         <td>${package.description}</td>
                         <td>${package.price}</td>
-                        <td>${package.image}</td>
+
                         <td>
                             <button class="btn btn-warning btn-sm edit-btn" >Edit</button>
                             <button class="btn btn-danger btn-sm delete-btn">Delete</button>
@@ -190,7 +190,6 @@
                 price: $('#packagePrice').val(),
                 duration: $('#packageDuration').val(),
                 description: $('#packageDescription').val(),
-                image: $('#packageImage').val()
             };
 
             $.ajax({
@@ -221,6 +220,7 @@
             $('#editPackageDuration').val(packageData.duration);
             $('#editPackageDescription').val(packageData.description);
 
+
             // Show the modal
             $('#editPackageModal').modal('show');
         }
@@ -235,7 +235,6 @@
                 price: $('#packagePrice').val(),
                 duration: $('#packageDuration').val(),
                 description: $('#packageDescription').val(),
-                image: $('#packageImage').val()
 
 
             };
@@ -245,7 +244,6 @@
             formData.append('price', updatedPackage.price);
             formData.append('duration', updatedPackage.duration);
             formData.append('description', updatedPackage.description);
-            formData.append('image', updatedPackage.image);
 
             $.ajax({
                 url: `http://localhost:8080/api/v1/packages/update/${packageId}`,

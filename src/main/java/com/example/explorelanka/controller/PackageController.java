@@ -24,7 +24,7 @@ public class PackageController {
     }
 
     @PostMapping(value = "/save")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> savePackage(@RequestBody @Valid PackageDTO packageDTO) {
         packageService.savePackage(packageDTO);
         return ResponseEntity.status(HttpStatus.OK)
@@ -32,22 +32,22 @@ public class PackageController {
     }
 
     @PutMapping(value = "/update/{id}")
-    @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<ResponseDTO> updatePackage(@PathVariable Long id, @RequestBody @Valid PackageDTO packageDTO) {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<ResponseDTO> updatePackage(@PathVariable String id, @RequestBody @Valid PackageDTO packageDTO) {
         packageService.updatePackage(id, packageDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Package Updated Successfully", null));
     }
 
     @GetMapping(value = "/all")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> getAllPackages() {
         return ResponseEntity.ok(new ResponseDTO(VarList.OK, "Package List Retrieved", packageService.getAllPackages()));
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    @PreAuthorize("hasAuthority('USER')")
-    public ResponseEntity<ResponseDTO> deletePackage(@PathVariable Long id) {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<ResponseDTO> deletePackage(@PathVariable String id) {
         try {
             packageService.deletePackage(id);
             return ResponseEntity.status(HttpStatus.OK)

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Bookings - ExploreLanka</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/adminBooking.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2 class="sidebar-title">ExploreLanka</h2>
+    <ul>
+        <li><a href="adminDashboard.html">Dashboard</a></li>
+        <li><a href="adminUsers.html">Users</a></li>
+        <li><a href="adminPackage.html">Packages</a></li>
+        <li><a href="adminBooking.html" class="active">Bookings</a></li>
+        <li><a href="#">Payments</a></li>
+        <li><a href="#">Weather Alerts</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Logout</a></li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <h2 class="mt-3">Bookings</h2>
+
+        <!-- Add Booking Button -->
+        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addBookingModal">Add New Booking</button>
+
+        <!-- Bookings Table -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>User Name</th>
+                <th>Package Name</th>
+                <th>Booking Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="tblbookings">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Add Booking Modal -->
+<div class="modal fade" id="addBookingModal" tabindex="-1" aria-labelledby="addBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addBookingModalLabel">Add New Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addBookingForm">
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="userName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="packageName" class="form-label">Package Name</label>
+                        <input type="text" class="form-control" id="packageName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookingDate" class="form-label">Booking Date</label>
+                        <input type="date" class="form-control" id="bookingDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" id="status" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Booking Modal -->
+<div class="modal fade" id="editBookingModal" tabindex="-1" aria-labelledby="editBookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editBookingModalLabel">Edit Booking</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editBookingForm">
+                    <input type="hidden" id="editBookingId">
+                    <div class="mb-3">
+                        <label for="editUserName" class="form-label">User Name</label>
+                        <input type="text" class="form-control" id="editUserName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPackageName" class="form-label">Package Name</label>
+                        <input type="text" class="form-control" id="editPackageName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBookingDate" class="form-label">Booking Date</label>
+                        <input type="date" class="form-control" id="editBookingDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editStatus" class="form-label">Status</label>
+                        <select class="form-control" id="editStatus" required>
+                            <option value="Pending">Pending</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        let bookings = [];
+
+        // Fetch and display bookings
+        $.ajax({
+            url: "http://localhost:8080/api/v1/bookings/all",
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            contentType: "application/json",
+            success: (res) => {
+                bookings = res.data;  // Assign data globally
+
+                let table = $('#tblbookings');
+                table.empty();
+                bookings.forEach((booking) => {
+                    table.append(`
+                    <tr data-id="${booking.id}">
+                        <td>${booking.id}</td>
+                        <td>${booking.userName}</td>
+                        <td>${booking.packageName}</td>
+                        <td>${booking.bookingDate}</td>
+                        <td>${booking.status}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm edit-btn">Edit</button>
+                            <button class="btn btn-danger btn-sm delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `);
+                });
+
+                // Add event listeners for edit and delete buttons
+                $('.edit-btn').click(function () {
+                    const bookingId = $(this).closest('tr').data('id');
+                    const bookingData = bookings.find(bkg => bkg.id === bookingId);
+                    openEditForm(bookingData);
+                });
+
+                $('.delete-btn').click(function () {
+                    const bookingId = $(this).closest('tr').data('id');
+                    deleteBooking(bookingId);
+                });
+            },
+            error: (error) => {
+                console.error(error);
+                alert("Something went wrong while fetching bookings.");
+            }
+        });
+
+        // Handle add booking form submission
+        $('#addBookingForm').submit(function (event) {
+            event.preventDefault();
+
+            const newBooking = {
+                userName: $('#userName').val(),
+                packageName: $('#packageName').val(),
+                bookingDate: $('#bookingDate').val(),
+                status: $('#status').val(),
+            };
+
+            $.ajax({
+                url: "http://localhost:8080/api/v1/bookings/save",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+                contentType: "application/json",
+                data: JSON.stringify(newBooking),
+                success: (res) => {
+                    alert("Booking added successfully.");
+                    location.reload();  // Reload the page to see the new booking
+                },
+                error: (error) => {
+                    console.error(error);
+                    alert("Something went wrong while adding the booking.");
+                }
+            });
+        });
+
+        function openEditForm(bookingData) {
+            // Populate form fields with booking data
+            $('#editBookingId').val(bookingData.id);
+            $('#editUserName').val(bookingData.userName);
+            $('#editPackageName').val(bookingData.packageName);
+            $('#editBookingDate').val(bookingData.bookingDate);
+            $('#editStatus').val(bookingData.status);
+
+            // Show the modal
+            $('#editBookingModal').modal('show');
+        }
+
+        $('#editBookingForm').submit(function (event) {
+            event.preventDefault();
+            const bookingId = $('#editBookingId').val();
+
+            const updatedBooking = {
+                id: bookingId,
+                userName: $('#editUserName').val(),
+                packageName: $('#editPackageName').val(),
+                bookingDate: $('#editBookingDate').val(),
+                status: $('#editStatus').val(),
+            };
+
+            $.ajax({
+                url: `http://localhost:8080/api/v1/bookings/update/${bookingId}`,
+                method: "PUT",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+                contentType: "application/json",
+                data: JSON.stringify(updatedBooking),
+                success: (res) => {
+                    alert("Booking updated successfully.");
+                    location.reload();  // Reload the page to see the changes
+                },
+                error: (error) => {
+                    console.error(error);
+                    alert("Something went wrong while updating the booking.");
+                }
+            });
+        });
+
+        function deleteBooking(bookingId) {
+            if (confirm("Are you sure you want to delete this booking?")) {
+                $.ajax({
+                    url: `http://localhost:8080/api/v1/bookings/delete/${bookingId}`,
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    },
+                    contentType: "application/json",
+                    success: (res) => {
+                        alert("Booking deleted successfully.");
+                        location.reload();  // Reload the page to see the changes
+                    },
+                    error: (error) => {
+                        console.error(error);
+                        alert("Something went wrong while deleting the booking.");
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
