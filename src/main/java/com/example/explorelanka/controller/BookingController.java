@@ -11,6 +11,7 @@ import com.example.explorelanka.service.BookingService;
 import com.example.explorelanka.service.PackageService;
 import com.example.explorelanka.service.UserService;
 import com.example.explorelanka.service.impl.BookingServiceImpl;
+import com.example.explorelanka.service.impl.EmailServiceImpl;
 import com.example.explorelanka.service.impl.UserServiceImpl;
 import com.example.explorelanka.util.VarList;
 import jakarta.validation.Valid;
@@ -36,6 +37,8 @@ public class BookingController {
     private UserServiceImpl userServiceImpl;
     @Autowired
     private UserService userService;
+    @Autowired
+    EmailServiceImpl emailService;
 
     @Autowired
     private PackageService packageService;
@@ -47,7 +50,7 @@ public class BookingController {
     }
 
     @PostMapping("/save")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> save(@Valid @RequestBody BookingDTO bookingDTO) {
         System.out.println("boking save controller");
         UserDTO userDto = userServiceImpl.findByEmail(bookingDTO.getUserEmail());
@@ -60,6 +63,26 @@ public class BookingController {
         bookingDTO.setTravelPackage(packageDTO);
         bookingDTO.setStatus(Booking.BookingStatus.valueOf(String.valueOf(Booking.BookingStatus.PENDING)));
         bookingServiceImpl.save(bookingDTO);
+
+        // Send confirmation email
+        String userEmail = bookingDTO.getUserEmail();
+        String userName = bookingDTO.getUser().getName();
+        LocalDate travelDate = bookingDTO.getTravelDate();
+        emailService.sendBookingConfirmationEmail(
+                userEmail,
+                "Your Booking is Confirmed – ExploreLanka 🌿\n",
+                "Hi " + userName + ",\n\n" +
+                        "Your booking has been confirmed successfully. Here are the details:\n\n" +
+                        "📅 Travel Date: " + travelDate + "\n" +
+                        "📍 Location: No.100, Nupe, Matara\n" +
+                        "📞 Contact: 0412265762\n\n" +
+                        "What to Expect:\n" +
+                        "Our expert team is ready to provide you with a relaxing and professional experience. If you have any questions before your travel, feel free to call us!\n\n" +
+                        "ExploreLanka Team\n" +
+                        "📍 No.100, Nupe, Matara\n" +
+                        "📞 0412265762"
+        );
+
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseDTO(VarList.OK, "Booking Saved Successfully", bookingDTO));
 
@@ -68,14 +91,18 @@ public class BookingController {
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> getAllBookings() {
-        List<BookingDTO> bookingList = bookingService.getAll();
-        if (bookingList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-                    .body(new ResponseDTO(VarList.No_Content, "No bookings found", null));
-        }
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseDTO(VarList.OK, "Success", bookingList));
+       return ResponseEntity.ok(new ResponseDTO(VarList.OK, "Success", bookingService.getAll()));
     }
+
+//    public ResponseEntity<ResponseDTO> getAllBookings() {
+//        List<BookingDTO> bookingList = bookingService.getAll();
+//        if (bookingList.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT)
+//                    .body(new ResponseDTO(VarList.No_Content, "No bookings found", null));
+//        }
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(new ResponseDTO(VarList.OK, "Success", bookingList));
+//    }
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")

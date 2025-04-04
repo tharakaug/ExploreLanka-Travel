@@ -8,15 +8,19 @@ import com.example.explorelanka.repo.BookingRepository;
 import com.example.explorelanka.repo.PackageRepository;
 import com.example.explorelanka.repo.UserRepository;
 import com.example.explorelanka.service.BookingService;
+import com.example.explorelanka.service.EmailService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -33,6 +37,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private EmailService emailService;
 
     private static final Logger logger = Logger.getLogger(BookingServiceImpl.class.getName());
 
@@ -54,13 +61,21 @@ public class BookingServiceImpl implements BookingService {
         booking.setUserName(bookingDTO.getUser().getName());
         bookingRepository.save(booking);
 
+
     }
 
     @Override
     public List<BookingDTO> getAll() {
-        List<Booking> bookings = bookingRepository.findAll();
+//        List<Booking> bookings = bookingRepository.findAll();
+//
+//        return modelMapper.map(bookings, new TypeToken<List<BookingDTO>>(){}.getType());
 
-        return modelMapper.map(bookings, new TypeToken<List<BookingDTO>>(){}.getType());
+        return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>() {}.getType());
+
+
+//        List<Booking> bookings = bookingRepository.findAll();
+//        Type listType = new TypeToken<List<BookingDTO>>() {}.getType();
+//        return modelMapper.map(bookings, listType);
     }
 
     @Override
