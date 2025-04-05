@@ -25,6 +25,7 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    text-align: center;
 }
 html,
 body {
@@ -52,6 +53,13 @@ header {
 
 a {
     text-decoration: none;
+}
+
+h2.section-title{
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 
@@ -255,6 +263,169 @@ nav {
     font-size: 12px;
     margin-top: 15px;
 }
+
+
+
+/*!* Weather Section Styles *!*/
+/*.weather-check {*/
+/*//background-color: rgba(255, 255, 255, 0.05);*/
+/*    background-color: #0a0d14;*/
+/*    padding: 40px 0;*/
+/*}*/
+
+/*.weather-form {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    gap: 20px;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.weather-form input {*/
+/*    padding: 12px;*/
+/*    font-size: 1rem;*/
+/*    width: 250px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.weather-form button {*/
+/*    padding: 12px 20px;*/
+/*    background-color: #3498db;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    font-size: 1rem;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.weather-form button:hover {*/
+/*    background-color: #2980b9;*/
+/*}*/
+
+/*#weather-info {*/
+/*    margin-top: 30px;*/
+/*    font-size: 1.2rem;*/
+/*}*/
+
+/*#weather-info h3 {*/
+/*    font-size: 1.5rem;*/
+/*    color: #2c3e50;*/
+/*}*/
+
+/*#weather-info p {*/
+/*    margin: 10px 0;*/
+/*    color: #34495e;*/
+/*}*/
+
+/*#weather-info span {*/
+/*    font-weight: bold;*/
+/*    color: #e74c3c;*/
+/*}*/
+/*.container {*/
+/*    width: 75%;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+
+/* Weather Section Styles */
+.weather-check {
+    background:  #0a0d14;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.weather-check .section-title {
+    font-size: 2.5rem;
+    color: #f1f1f1;
+    margin-bottom: 30px;
+}
+
+.weather-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.weather-form input {
+    padding: 15px;
+    font-size: 1.1rem;
+    width: 280px;
+    border: 0px solid #ffffff;
+    border-radius: 8px;
+    background: #0d0d85;
+    color: #fff;
+}
+
+.weather-form input::placeholder {
+    color: #ffffff;
+}
+
+.weather-form button {
+    padding: 14px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.weather-form button:hover {
+    background: #2980b9;
+}
+
+/* Weather Info Card */
+.weather-card {
+    background: #3333a8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.weather-card h3 {
+    font-size: 2rem;
+    color: #f1f1f1;
+    margin-bottom: 20px;
+}
+
+.weather-details p {
+    margin: 10px 0;
+    font-size: 1.3rem;
+    color: #ddd;
+}
+
+.weather-details span {
+    font-weight: bold;
+    color: #e67e22;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
 
 
 
