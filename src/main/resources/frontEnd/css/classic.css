@@ -58,12 +58,17 @@ a {
 nav {
     background-color: rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid var(--extra-light);
+    height: 80px;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
 }
 
 .nav__bar {
     max-width: var(--max-width);
     margin: auto;
-    padding: 1.5rem 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -138,6 +143,7 @@ nav {
     color: #FFF;
     padding: 60px 20px;
     text-align: center;
+    margin-bottom: 2.5rem;
 }
 
 .section-title {
@@ -155,7 +161,7 @@ nav {
 }
 
 .package-card {
-    background: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #1e2230 0%, #2a2f45 100%);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -186,89 +192,96 @@ nav {
 }
 
 
-/* Itinerary Section */
-.itinerary {
-    background: linear-gradient(135deg, #0a0d14 0%, #1e2230 100%);
-    padding: 60px 20px;
-}
 
-.section-title {
-    font-size: 40px;
-    font-weight: 700;
-    text-align: center;
-    color: #ffffff;
-    margin-bottom: 10px;
-}
 
-.section-description {
-    font-size: 20px;
-    text-align: center;
-    color: #d1d1d1;
-    margin-bottom: 40px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .itinerary-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    overflow-x: auto;
     gap: 30px;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #f49e09 #1e2230;
+}
+
+.itinerary-details::-webkit-scrollbar {
+    height: 8px;
+}
+.itinerary-details::-webkit-scrollbar-thumb {
+    background: #f49e09;
+    border-radius: 4px;
+}
+.itinerary-details::-webkit-scrollbar-track {
+    background: #1e2230;
 }
 
 .itinerary-day {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    flex: 0 0 auto;
+    background: linear-gradient(135deg, #1e2230 0%, #2a2f45 100%);
     border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-    backdrop-filter: blur(8px);
     overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    width: 300px;
+    min-width: 300px;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(10px);
+    margin-top: 20px;
 }
 
 .itinerary-day:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-10px);
+    box-shadow: 0 1px 3px #f49e09;
 }
 
 .itinerary-image {
     width: 100%;
-    height: 220px;
+    height: 180px;
     object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.itinerary-day:hover .itinerary-image {
-    transform: scale(1.05);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }
 
 .itinerary-text {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
     text-align: center;
 }
 
 .itinerary-text h3 {
-    font-size: 24px;
+    font-size: 20px;
     color: #ffffff;
-    margin-bottom: 15px;
+    font-weight: 600;
+    margin: 0;
 }
 
 .day-btn {
-    background: linear-gradient(135deg, #ff7b00, #ffb347);
+    background: #f49e09;
+    color: #fff;
     border: none;
-    color: #ffffff;
-    padding: 12px 24px;
+    padding: 10px 25px;
     font-size: 16px;
-    font-weight: 600;
+    border-radius: 12px;
     cursor: pointer;
-    border-radius: 50px;
     transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .day-btn:hover {
-    background: linear-gradient(135deg, #ffb347, #ff7b00);
+    background: #ff9500;
     transform: scale(1.05);
 }
+@media (max-width: 600px) {
+    .itinerary-day {
+        width: 250px;
+        min-width: 250px;
+    }
+}
+
+
+
 
 
 
@@ -277,6 +290,7 @@ nav {
 .inclusions {
     background-color:#0a0d14;
     padding: 40px 0;
+    margin-top: 2.5rem;
 }
 
 .section-title {
@@ -309,12 +323,12 @@ nav {
 }
 
 .inclusion-box {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #1e2230 0%, #2a2f45 100%);
     border-left: 5px solid #f49e09;
 }
 
 .exclusion-box {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #1e2230 0%, #2a2f45 100%);
     border-left: 5px solid #f49e09;
 }
 
@@ -440,7 +454,7 @@ ul li:hover {
     font-size: 2.5rem;
     color: #FFF;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .section-subtitle {
@@ -455,7 +469,7 @@ ul li:hover {
 }
 
 .price-card {
-    background: white;
+    background: linear-gradient(135deg, #1e2230 0%, #2a2f45 100%);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -471,19 +485,19 @@ ul li:hover {
 
 .price-header h3, h4{
     font-size: 1.6rem;
-    color: #222;
+    color: white;
     margin-bottom: 10px;
 }
 
 .price {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #e63946;
+    color:#f49e09;
     margin-bottom: 15px;
 }
 
 .price span {
-    color: #d32f2f;
+    color: #f49e09;
     font-size: 1.8rem;
 }
 
@@ -497,7 +511,7 @@ ul li:hover {
 .price-details ul li,
 .package-benefits ul li {
     font-size: 1rem;
-    color: #555;
+    color: white;
     margin: 10px 30px;
     display: flex;
     align-items: center;
@@ -507,7 +521,7 @@ ul li:hover {
 .testimonial {
     font-style: italic;
     font-size: 1rem;
-    color: #666;
+    color: white;
     margin: 20px 0;
 }
 
@@ -518,7 +532,7 @@ ul li:hover {
 .btn.book-now {
     display: inline-block;
     padding: 14px 25px;
-    background: #ff5722;
+    background:#f49e09;
     color: white;
     border: none;
     border-radius: 5px;
@@ -529,7 +543,7 @@ ul li:hover {
 }
 
 .btn.book-now:hover {
-    background: #e64a19;
+    background: #ff9500;
     transform:scale(1.05);
 }
 

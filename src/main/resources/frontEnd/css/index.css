@@ -29,7 +29,6 @@
     font-family: var(--header-font);
     text-align: center;
     position: sticky;
-
 }
 
 .section__subheader {
@@ -156,6 +155,96 @@ nav {
     background-color: var(--white);
 }
 
+/*profile*/
+.profile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 300px;
+    height: 100%;
+    background: linear-gradient(135deg, #fff, #f0f8ff);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.15);
+    transition: right 0.4s ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    border-radius: 8px 0 0 8px;
+}
+
+.profile-sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.profile-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00b894;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 22px;
+    color: #00b894;
+}
+
+.sidebar-header p {
+    font-size: 14px;
+    color: #666;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 26px;
+    color: #333;
+    cursor: pointer;
+}
+
+.sidebar-content {
+    margin-top: 30px;
+}
+
+.sidebar-links {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-links li {
+    margin-bottom: 20px;
+}
+
+.sidebar-links a {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.sidebar-links a i {
+    margin-right: 10px;
+    font-size: 22px;
+    color: #00b894;
+}
+
+.sidebar-links a:hover {
+    color: #00b894;
+    transform: translateX(5px);
+}
+
+
+/*abot*/
 .about__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

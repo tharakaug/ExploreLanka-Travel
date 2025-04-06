@@ -23,11 +23,27 @@
                 <li class="link"><a href="#gallery">Gallery</a></li>
                 <li class="link"><a href="#Footer">Contact</a></li>
                 <li class="link search">
-                    <span><i class="ri-search-line"></i></span>
-                </li>
+                    <span id="profileIcon"><i class="ri-user-line"></i></span>                </li>
             </ul>
         </div>
     </nav>
+    <div id="profileSidebar" class="profile-sidebar">
+        <div class="sidebar-header">
+            <img src="assets/profile-pic.jpg" alt="User" class="profile-pic">
+            <h3>Hello, Explorer!</h3>
+            <p>Travel lover 🌍</p>
+            <span class="close-btn" id="closeSidebar">&times;</span>
+        </div>
+        <div class="sidebar-content">
+            <ul class="sidebar-links">
+                <li><a href="#"><i class="ri-calendar-line"></i> My Bookings</a></li>
+                <li><a href="#"><i class="ri-heart-line"></i> Wishlist</a></li>
+                <li><a href="#"><i class="ri-user-settings-line"></i> Account Settings</a></li>
+                <li><a href="#"><i class="ri-logout-box-line"></i> Log Out</a></li>
+            </ul>
+        </div>
+    </div>
+
 
     <div class="section__container header__container">
         <h1>The new way to plan your next adventure</h1>
@@ -266,5 +282,19 @@
 
 
 <script src="js/index.js"></script>
+<script>
+    const profileIcon = document.getElementById('profileIcon');
+    const profileSidebar = document.getElementById('profileSidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    profileIcon.addEventListener('click', () => {
+        profileSidebar.classList.toggle('open');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+        profileSidebar.classList.remove('open');
+    });
+</script>
+
 </body>
 </html>
