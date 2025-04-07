@@ -179,36 +179,6 @@
             }
         });
 
-        // Handle add booking form submission
-        $('#addBookingForm').submit(function (event) {
-            event.preventDefault();
-
-            const newBooking = {
-                userName: $('#userName').val(),
-                packageName: $('#packageName').val(),
-                bookingDate: $('#bookingDate').val(),
-                status: $('#status').val(),
-            };
-
-            $.ajax({
-                url: "http://localhost:8080/api/v1/bookings/save",
-                method: "POST",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                },
-                contentType: "application/json",
-                data: JSON.stringify(newBooking),
-                success: (res) => {
-                    alert("Booking added successfully.");
-                    location.reload();  // Reload the page to see the new booking
-                },
-                error: (error) => {
-                    console.error(error);
-                    alert("Something went wrong while adding the booking.");
-                }
-            });
-        });
-
         function openEditForm(bookingData) {
             // Populate form fields with booking data
             $('#editBookingId').val(bookingData.id);
@@ -233,23 +203,6 @@
                 status: $('#editStatus').val(),
             };
 
-            $.ajax({
-                url: `http://localhost:8080/api/v1/bookings/update/${bookingId}`,
-                method: "PUT",
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                },
-                contentType: "application/json",
-                data: JSON.stringify(updatedBooking),
-                success: (res) => {
-                    alert("Booking updated successfully.");
-                    location.reload();  // Reload the page to see the changes
-                },
-                error: (error) => {
-                    console.error(error);
-                    alert("Something went wrong while updating the booking.");
-                }
-            });
         });
 
         function deleteBooking(bookingId) {

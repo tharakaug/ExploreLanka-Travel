@@ -65,17 +65,8 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingDTO> getAll() {
-//        List<Booking> bookings = bookingRepository.findAll();
-//
-//        return modelMapper.map(bookings, new TypeToken<List<BookingDTO>>(){}.getType());
-
+    public List<BookingDTO> getAllBookings() {
         return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>() {}.getType());
-
-
-//        List<Booking> bookings = bookingRepository.findAll();
-//        Type listType = new TypeToken<List<BookingDTO>>() {}.getType();
-//        return modelMapper.map(bookings, listType);
     }
 
     @Override

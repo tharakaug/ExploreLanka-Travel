@@ -142,7 +142,7 @@ nav {
 
 /* Booking Section */
 .booking {
-    background: url('assets/banner.jpg') center/cover no-repeat;
+    /*background: url('assets/banner.jpg') center/cover no-repeat;*/
     padding: 60px 0;
     text-align: center;
     color:  #0a0d14;

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -50,7 +51,7 @@ public class BookingController {
     }
 
     @PostMapping("/save")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<ResponseDTO> save(@Valid @RequestBody BookingDTO bookingDTO) {
         System.out.println("boking save controller");
         UserDTO userDto = userServiceImpl.findByEmail(bookingDTO.getUserEmail());
@@ -91,18 +92,9 @@ public class BookingController {
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> getAllBookings() {
-       return ResponseEntity.ok(new ResponseDTO(VarList.OK, "Success", bookingService.getAll()));
+        return ResponseEntity.ok(new ResponseDTO(VarList.OK, "All Bookings", bookingService.getAllBookings()));
     }
 
-//    public ResponseEntity<ResponseDTO> getAllBookings() {
-//        List<BookingDTO> bookingList = bookingService.getAll();
-//        if (bookingList.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.NO_CONTENT)
-//                    .body(new ResponseDTO(VarList.No_Content, "No bookings found", null));
-//        }
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(new ResponseDTO(VarList.OK, "Success", bookingList));
-//    }
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
