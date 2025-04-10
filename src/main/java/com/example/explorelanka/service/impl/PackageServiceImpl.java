@@ -40,6 +40,7 @@ public class PackageServiceImpl implements PackageService {
         existingPackage.setName(packageDTO.getName());
         existingPackage.setDescription(packageDTO.getDescription());
         existingPackage.setPrice(packageDTO.getPrice());
+        existingPackage.setDuration(packageDTO.getDuration());
         packageRepository.save(existingPackage);
     }
 

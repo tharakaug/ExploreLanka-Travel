@@ -18,8 +18,6 @@
         <li><a href="adminPackage.html" class="active">Packages</a></li>
         <li><a href="adminBooking.html" class="active">Bookings</a></li>
         <li><a href="#">Payments</a></li>
-        <li><a href="#">Weather Alerts</a></li>
-        <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li>
     </ul>
 </div>
@@ -41,7 +39,6 @@
                 <th>Duration</th>
                 <th>Description</th>
                 <th>Price$</th>
-<!--                <th>Image</th>-->
                 <th>Actions</th>
             </tr>
             </thead>
@@ -116,10 +113,6 @@
                         <label for="editPackageDescription" class="form-label">Description</label>
                         <textarea class="form-control" id="editPackageDescription" rows="3" required></textarea>
                     </div>
-<!--                    <div class="mb-3">-->
-<!--                        <label for="editPackageImage" class="form-label">Package Image</label>-->
-<!--                        <input type="file" class="form-control" id="editPackageImage" accept="image/*" required>-->
-<!--                    </div>-->
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
@@ -220,7 +213,6 @@
             $('#editPackageDuration').val(packageData.duration);
             $('#editPackageDescription').val(packageData.description);
 
-
             // Show the modal
             $('#editPackageModal').modal('show');
         }
@@ -231,19 +223,11 @@
 
             const updatedPackage = {
                 id: packageId,
-                name: $('#packageName').val(),
-                price: $('#packagePrice').val(),
-                duration: $('#packageDuration').val(),
-                description: $('#packageDescription').val(),
-
-
+                name: $('#editPackageName').val(),
+                price: $('#editPackagePrice').val(),
+                duration: $('#editPackageDuration').val(),
+                description: $('#editPackageDescription').val(),
             };
-
-            const formData = new FormData();
-            formData.append('name', updatedPackage.name);
-            formData.append('price', updatedPackage.price);
-            formData.append('duration', updatedPackage.duration);
-            formData.append('description', updatedPackage.description);
 
             $.ajax({
                 url: `http://localhost:8080/api/v1/packages/update/${packageId}`,
@@ -251,7 +235,6 @@
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")
                 },
-                processData: false,
                 contentType: "application/json",
                 data: JSON.stringify(updatedPackage),
                 success: (res) => {

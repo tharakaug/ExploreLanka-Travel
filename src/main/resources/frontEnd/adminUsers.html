@@ -1,3 +1,183 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Admin Users - ExploreLanka</title>-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/adminUsers.css">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash; Sidebar &ndash;&gt;-->
+<!--<div class="sidebar">-->
+<!--    <h2 class="sidebar-title">ExploreLanka</h2>-->
+<!--    <ul>-->
+<!--        <li><a href="adminDashboard.html">Dashboard</a></li>-->
+<!--        <li><a href="adminUsers.html">Users</a></li>-->
+<!--        <li><a href="adminPackage.html" class="active">Packages</a></li>-->
+<!--        <li><a href="adminBooking.html" class="active">Bookings</a></li>-->
+<!--        <li><a href="#">Payments</a></li>-->
+<!--        <li><a href="#">Weather Alerts</a></li>-->
+<!--        <li><a href="#">Reports</a></li>-->
+<!--        <li><a href="#">Logout</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Main Content &ndash;&gt;-->
+<!--<div class="main-content">-->
+<!--    <div class="container">-->
+<!--        <h2 class="mt-3">Admin Users</h2>-->
+
+<!--        &lt;!&ndash; Add User Button &ndash;&gt;-->
+<!--        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>-->
+
+<!--        &lt;!&ndash; Admin Users Table &ndash;&gt;-->
+<!--        <table class="table table-striped">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>Name</th>-->
+<!--                <th>Email</th>-->
+<!--                <th>Password</th>-->
+<!--                <th>Role</th>-->
+<!--                <th>Actions</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody id="tbluser">-->
+
+<!--            </tbody>-->
+<!--&lt;!&ndash;            <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>#101</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>admin1</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>admin1@example.com</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>Super Admin</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button class="btn btn-warning btn-sm">Edit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button class="btn btn-danger btn-sm">Delete</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>#102</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>moderator2</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>mod2@example.com</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>Moderator</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button class="btn btn-warning btn-sm">Edit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button class="btn btn-danger btn-sm">Delete</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            </tbody>&ndash;&gt;-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Add User Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="addUserModalLabel">Add New Admin User</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="username" class="form-label">Username</label>-->
+<!--                        <input type="text" class="form-control" id="username" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="email" class="form-label">Email</label>-->
+<!--                        <input type="email" class="form-control" id="email" required>-->
+<!--                    </div>-->
+<!--                    <div class="mb-3">-->
+<!--                        <label for="role" class="form-label">Role</label>-->
+<!--                        <select class="form-control" id="role">-->
+<!--                            <option>Super Admin</option>-->
+<!--                            <option>Moderator</option>-->
+<!--                            <option>Support</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-primary">Add User</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        let users = [];-->
+
+<!--        // Fetch and display users-->
+<!--        $.ajax({-->
+<!--            url: "http://localhost:8080/api/v1/user/all",-->
+<!--            method: "GET",-->
+<!--            headers: {-->
+<!--                "Authorization": "Bearer " + localStorage.getItem("token")-->
+<!--            },-->
+<!--            contentType: "application/json",-->
+<!--            success: (res) => {-->
+<!--                users = res.data;  // Assign data globally-->
+
+<!--                let table = $('#tbluser');-->
+<!--                table.empty();-->
+<!--                users.forEach((user) => {-->
+<!--                    table.append(`-->
+<!--                    <tr data-id="${user.id}">-->
+<!--                        <td>${user.id}</td>-->
+<!--                        <td>${user.name}</td>-->
+<!--                        <td>${user.email}</td>-->
+<!--                        <td>${user.password}</td>-->
+<!--                        <td>${user.role}</td>-->
+<!--                        <td>-->
+<!--                            <button class="btn btn-danger btn-sm delete-btn">Delete</button>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                `);-->
+<!--                });-->
+
+<!--                $('.delete-btn').click(function () {-->
+<!--                    const userId = $(this).closest('tr').data('id');-->
+<!--                    deleteUser(userId);-->
+<!--                });-->
+<!--            },-->
+<!--            error: (error) => {-->
+<!--                console.error(error);-->
+<!--                alert("Something went wrong while fetching users.");-->
+<!--            }-->
+<!--        });-->
+
+<!--        function deleteUser(id) {-->
+<!--            if (confirm("Are you sure you want to delete this user?")) {-->
+<!--                $.ajax({-->
+<!--                    url: `http://localhost:8080/api/v1/user/delete/${id}`,-->
+<!--                    method: "DELETE",-->
+<!--                    headers: {-->
+<!--                        "Authorization": "Bearer " + localStorage.getItem("token")-->
+<!--                    },-->
+<!--                    contentType: "application/json",-->
+<!--                    success: (res) => {-->
+<!--                        alert("User deleted successfully.");-->
+<!--                        location.reload();  // Reload the page to see the changes-->
+<!--                    },-->
+<!--                    error: (error) => {-->
+<!--                        console.error(error);-->
+<!--                        alert("Something went wrong while deleting the user.");-->
+<!--                    }-->
+<!--                });-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +198,6 @@
         <li><a href="adminPackage.html" class="active">Packages</a></li>
         <li><a href="adminBooking.html" class="active">Bookings</a></li>
         <li><a href="#">Payments</a></li>
-        <li><a href="#">Weather Alerts</a></li>
-        <li><a href="#">Reports</a></li>
         <li><a href="#">Logout</a></li>
     </ul>
 </div>
@@ -47,28 +225,6 @@
             <tbody id="tbluser">
 
             </tbody>
-<!--            <tbody>-->
-<!--            <tr>-->
-<!--                <td>#101</td>-->
-<!--                <td>admin1</td>-->
-<!--                <td>admin1@example.com</td>-->
-<!--                <td>Super Admin</td>-->
-<!--                <td>-->
-<!--                    <button class="btn btn-warning btn-sm">Edit</button>-->
-<!--                    <button class="btn btn-danger btn-sm">Delete</button>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>#102</td>-->
-<!--                <td>moderator2</td>-->
-<!--                <td>mod2@example.com</td>-->
-<!--                <td>Moderator</td>-->
-<!--                <td>-->
-<!--                    <button class="btn btn-warning btn-sm">Edit</button>-->
-<!--                    <button class="btn btn-danger btn-sm">Delete</button>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
         </table>
     </div>
 </div>
@@ -82,7 +238,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addUserForm">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" required>
@@ -92,11 +248,13 @@
                         <input type="email" class="form-control" id="email" required>
                     </div>
                     <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
-                        <select class="form-control" id="role">
-                            <option>Super Admin</option>
-                            <option>Moderator</option>
-                            <option>Support</option>
+                        <select class="form-control" id="role" required>
+                            <option value="ADMIN">Admin</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Add User</button>
@@ -113,7 +271,7 @@
     $(document).ready(function () {
         let users = [];
 
-        // Fetch and display packages
+        // Fetch and display users
         $.ajax({
             url: "http://localhost:8080/api/v1/user/all",
             method: "GET",
@@ -128,46 +286,80 @@
                 table.empty();
                 users.forEach((user) => {
                     table.append(`
-                    <tr data-id="${user.id}">
+                    <tr data-id="${user.uid}">
                         <td>${user.uid}</td>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
                         <td>${user.password}</td>
                         <td>${user.role}</td>
                         <td>
-<!--                            <button class="btn btn-warning btn-sm edit-btn" >Edit</button>-->
                             <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                         </td>
                     </tr>
                 `);
                 });
+
                 $('.delete-btn').click(function () {
-                    const userEmail = $(this).closest('tr').data('email');
-                    deleteUser(userEmail);
+                    const userId = $(this).closest('tr').data('id');
+                    deleteUser(userId);
                 });
+            },
+            error: (error) => {
+                console.error(error);
+                alert("Something went wrong while fetching users.");
             }
         });
-        function deleteUser(email) {
-            if (confirm("Are you sure you want to delete this package?")) {
+
+        // Handle add user form submission
+        $('#addUserForm').submit(function (event) {
+            event.preventDefault();
+
+            const newUser = {
+                name: $('#username').val(),
+                email: $('#email').val(),
+                password: $('#password').val(),
+                role: $('#role').val(),
+            };
+
+            $.ajax({
+                url: "http://localhost:8080/api/v1/user/register",
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+                contentType: "application/json",
+                data: JSON.stringify(newUser),
+                success: (res) => {
+                    alert("User added successfully.");
+                    location.reload();  // Reload the page to see the new user
+                },
+                error: (error) => {
+                    console.error(error);
+                    alert("Something went wrong while adding the user.");
+                }
+            });
+        });
+
+        function deleteUser(id) {
+            if (confirm("Are you sure you want to delete this user?")) {
                 $.ajax({
-                    url: `http://localhost:8080/api/v1/user/delete/${email}`,
+                    url: `http://localhost:8080/api/v1/user/delete/${id}`,
                     method: "DELETE",
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token")
                     },
                     contentType: "application/json",
                     success: (res) => {
-                        alert("Package deleted successfully.");
+                        alert("User deleted successfully.");
                         location.reload();  // Reload the page to see the changes
                     },
                     error: (error) => {
                         console.error(error);
-                        alert("Something went wrong while deleting the package.");
+                        alert("Something went wrong while deleting the user.");
                     }
                 });
             }
         }
-
     });
 </script>
 </body>

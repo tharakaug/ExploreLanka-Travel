@@ -70,10 +70,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void deleteUser(UUID id) {
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found");
-
-        }
         userRepository.deleteById(id);
     }
 

@@ -32,6 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<ResponseDTO> registerUser(@RequestBody @Valid UserDTO userDTO) {
         try {
             int res = userService.saveUser(userDTO);
@@ -65,22 +66,11 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ResponseDTO> deleteUser(@PathVariable UUID id) {
-       userServiceImpl.deleteUser(id);
-       return ResponseEntity.status(HttpStatus.OK)
-               .body(new ResponseDTO(VarList.OK, "User Deleted Successfully", null));
-
+        userServiceImpl.deleteUser(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ResponseDTO(VarList.OK, "User Deleted Successfully", null));
     }
 
-//    @PutMapping("/updateRole")
-//    public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String newRole) {
-//        try {
-//            userService.updateUserRole(email, newRole);
-//            return ResponseEntity.ok(new ResponseDTO(VarList.OK, "User Role Updated Successfully", null));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
-//        }
-//    }
 
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")

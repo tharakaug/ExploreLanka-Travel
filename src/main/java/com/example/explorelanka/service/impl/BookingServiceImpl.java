@@ -66,7 +66,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<BookingDTO> getAllBookings() {
+
         return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>() {}.getType());
+
     }
 
     @Override
