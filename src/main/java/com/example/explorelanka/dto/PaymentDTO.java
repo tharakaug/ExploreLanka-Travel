@@ -15,9 +15,14 @@ import java.time.LocalDateTime;
 public class PaymentDTO {
     private Long id;
     private Long bookingId;
-    private BigDecimal amount;
-    private String paymentMethod; // e.g., "Credit Card", "PayPal"
-    private String paymentStatus; // e.g., "SUCCESS", "FAILED", "PENDING"
-    private LocalDateTime transactionDate;
+    private double amount;
+    private String method; // CREDIT_CARD, PAYPAL, BANK_TRANSFER
+    private LocalDateTime paymentDate;
+    private String MerchantId;
+    private String Currency;
+    private String ReturnUrl;
+    private String CancelUrl;
+    private String NotifyUrl;
+    private String hash;
 
 }

@@ -57,8 +57,8 @@ public class BookingServiceImpl implements BookingService {
         booking.setAdditionalRequests(bookingDTO.getAdditionalRequests());
         booking.setNumberOfGuests(bookingDTO.getNumberOfGuests());
         booking.setTravelDate(bookingDTO.getTravelDate());
-        booking.setUserEmail(bookingDTO.getUserEmail());
-        booking.setUserName(bookingDTO.getUser().getName());
+//        booking.setUserEmail(bookingDTO.getUserEmail());
+//        booking.setUserName(bookingDTO.getUser().getName());
         bookingRepository.save(booking);
 
 
@@ -67,8 +67,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingDTO> getAllBookings() {
 
-        return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>() {}.getType());
+//        return modelMapper.map(bookingRepository.findAll(), new TypeToken<List<BookingDTO>>() {}.getType());
 
+        return bookingRepository.findAll().stream()
+                .map(booking -> modelMapper.map(booking, BookingDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Override

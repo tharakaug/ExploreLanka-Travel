@@ -1,17 +1,74 @@
-/* Sidebar */
+/*!* Sidebar *!*/
+/*.sidebar {*/
+/*    height: 100vh;*/
+/*    width: 250px;*/
+/*    position: fixed;*/
+/*    background: #007bff;*/
+/*    color: white;*/
+/*    padding-top: 20px;*/
+/*    font-family: Arial, sans-serif;*/
+/*}*/
+
+/*.sidebar-title {*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+/*.sidebar ul {*/
+/*    list-style: none;*/
+/*    padding: 0;*/
+/*}*/
+
+/*.sidebar ul li {*/
+/*    padding: 15px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.sidebar ul li a {*/
+/*    text-decoration: none;*/
+/*    color: white;*/
+/*    font-size: 18px;*/
+/*    display: block;*/
+/*}*/
+/*.sidebar ul li:hover {*/
+/*    background: #0056b3;*/
+/*}*/
+
+/*!* Main Content *!*/
+/*.main-content {*/
+/*    margin-left: 250px;*/
+/*    padding: 20px;*/
+/*    background: #f8f9fa;*/
+/*    min-height: 100vh;*/
+/*}*/
+
+/*!* Table Styling *!*/
+/*.table th {*/
+/*    background: #007bff;*/
+/*    color: white;*/
+/*}*/
+
+/*.table td {*/
+/*    vertical-align: middle;*/
+/*}*/
+
+/* Sidebar Styles */
 .sidebar {
-    height: 100vh;
-    width: 250px;
-    position: fixed;
-    background: #007bff;
+    background-color: #2C3E50; /* Dark blue */
     color: white;
-    padding-top: 20px;
-    font-family: Arial, sans-serif;
+    height: 100vh;
+    padding: 50px;
+    position: fixed;
+    width: 300px;
+    transition: all 0.3s;
 }
 
-.sidebar-title {
+.sidebar h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #F39C12; /* Golden yellow */
 }
 
 .sidebar ul {
@@ -20,34 +77,144 @@
 }
 
 .sidebar ul li {
-    padding: 15px;
-    text-align: center;
+    margin: 15px 0;
 }
 
 .sidebar ul li a {
+    color: #ECF0F1; /* Light gray */
     text-decoration: none;
-    color: white;
-    font-size: 18px;
     display: block;
+    padding: 15px;
+    border-radius: 40px;
+    font-size: 22px;
+    transition: background-color 0.3s ease;
 }
-.sidebar ul li:hover {
-    background: #0056b3;
+
+.sidebar ul li a:hover {
+    background-color: #F39C12; /* Green */
 }
+
+/* Active Link Style */
+/*.sidebar ul li a.active {*/
+/*    background-color: #25D366; !* WhatsApp Green *!*/
+/*    color: white;*/
+/*}*/
 
 /* Main Content */
 .main-content {
     margin-left: 250px;
     padding: 20px;
-    background: #f8f9fa;
-    min-height: 100vh;
 }
 
 /* Table Styling */
-.table th {
-    background: #007bff;
-    color: white;
+.table {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
-.table td {
+.table th, .table td {
+    text-align: center;
+    padding: 15px;
     vertical-align: middle;
+    color: #2C3E50; /* Dark Blue */
+}
+
+/* Table Row Hover Effect */
+.table tbody tr:hover {
+    background-color: #F7F7F7;
+    cursor: pointer;
+}
+
+/* Add Package Button Styling */
+.btn-primary {
+    background-color: #F39C12; /* Green */
+    border-color: #F39C12;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #F39C12; /* Darker Green */
+    border-color: #F39C12;
+}
+
+/* Modal Styling */
+.modal-content {
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    background-color: #ECF0F1; /* Light gray */
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2C3E50; /* Dark Blue */
+}
+
+/* Input and Textarea Fields Styling */
+.form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #BDC3C7; /* Light gray border */
+}
+
+/* Hover effect for action buttons */
+.btn-sm {
+    border-radius: 10%;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.btn-sm:hover {
+    transform: scale(1.1);
+}
+
+/* Button Colors for Edit/Delete */
+.btn-warning {
+    background-color: #F39C12; /* Golden Yellow */
+    border-color: #F39C12;
+    transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #F1C40F; /* Lighter Golden Yellow */
+    border-color: #F1C40F;
+}
+
+.btn-danger {
+    background-color: #E74C3C; /* Red */
+    border-color: #E74C3C;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #C0392B; /* Dark Red */
+    border-color: #C0392B;
+}
+
+/* Modal Body */
+.modal-body {
+    background-color: #FFFFFF; /* White */
+    border-radius: 8px;
+}
+
+.table th {
+    background-color: #BDC3C7; /* Light Gray */
+    color: #2C3E50;
+}
+
+/* Adjust row height and spacing */
+.table th, .table td {
+    height: 50px;
+}
+
+/* Add some padding around table */
+.table-container {
+    padding: 20px;
 }

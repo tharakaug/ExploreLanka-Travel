@@ -27,6 +27,7 @@
             </ul>
         </div>
     </nav>
+
     <div id="profileSidebar" class="profile-sidebar">
         <div class="sidebar-header">
             <img src="assets/profile-pic.jpg" alt="User" class="profile-pic">
@@ -43,6 +44,9 @@
             </ul>
         </div>
     </div>
+
+
+
 
 
     <div class="section__container header__container">
@@ -257,6 +261,11 @@
             </form>
         </div>
 
+        <!-- WhatsApp Floating Button -->
+        <a href="https://wa.me/94760676802" target="_blank" class="whatsapp-btn" id="whatsapp-btn">
+            <i class="ri-whatsapp-line"></i>
+        </a>
+
         <div class="footer__socials">
             <h5>Follow Us</h5>
             <div class="social-icons">
@@ -275,12 +284,15 @@
             <li><a href="#terms-conditions">Terms & Conditions</a></li>
         </ul>
     </div>
+
+
+
 </footer>
 
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="js/index.js"></script>
 <script>
     const profileIcon = document.getElementById('profileIcon');
@@ -294,7 +306,10 @@
     closeSidebar.addEventListener('click', () => {
         profileSidebar.classList.remove('open');
     });
+
 </script>
 
+
 </body>
+
 </html>

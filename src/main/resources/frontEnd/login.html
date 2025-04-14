@@ -1,60 +1,286 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>ExploreLanka - Sign In & Sign Up</title>-->
+<!--    <link rel="stylesheet" href="css/login.css">-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div class="auth-container">-->
+<!--    <div class="auth-box">-->
+
+<!--        <form id="signInForm">-->
+<!--            <h2>Sign In</h2>-->
+<!--            <input id="emailSignIn" type="email" placeholder="Email" required>-->
+<!--            <input  id="passwordSignIn" type="password" placeholder="Password" required>-->
+<!--            <button class="btn" type="button"  id="btn-login2">Login</button>-->
+<!--            <p class="switch-text">Don't have an account? <span onclick="showSignUp()">Sign Up</span></p>-->
+<!--        </form>-->
+
+<!--        <form id="signUpForm" style="display: none;">-->
+<!--            <h2>Sign Up</h2>-->
+<!--            <input type="text" placeholder="Full Name" required>-->
+<!--            <input type="email" placeholder="Email" required>-->
+<!--            <input type="password" placeholder="Password" required>-->
+<!--            <button type="submit" class="btn">Register</button>-->
+<!--            <p class="switch-text">Already have an account? <span onclick="showSignIn()">Sign In</span></p>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>-->
+<!--<script src="js/login.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function () {-->
+<!--        $("#sign-up-btn2").click(function () {-->
+
+<!--            let username = $("#nameSignUp").val().trim();-->
+<!--            let email = $("#emailSignUp").val().trim();-->
+<!--            let password = $("#passwordSignUp").val().trim();-->
+
+<!--            if (!username || !email || !password) {-->
+<!--                alert("All fields are required!");-->
+<!--                return;-->
+<!--            }-->
+
+<!--            $.ajax({-->
+<!--                url: "http://localhost:8080/api/v1/user/register",-->
+<!--                method: "POST",-->
+<!--                contentType: "application/json",-->
+<!--                data: JSON.stringify({-->
+<!--                    "username": username,-->
+<!--                    "email": email,-->
+<!--                    "password": password,-->
+<!--                    "role": "USER"-->
+<!--                }),-->
+<!--                success: (res) => {-->
+<!--                    console.log("sgdhfjk    "+res.data.token);-->
+<!--                    window.localStorage.setItem("token", res.data.token);-->
+<!--                    if (res.message === "Success") {-->
+<!--                        console.log("Registration successful");-->
+<!--                        alert("Registration successful");-->
+<!--                    } else {-->
+<!--                        alert("Failed: " + (res.message || "Unknown error"));-->
+<!--                    }-->
+<!--                },-->
+<!--                error: (error) => {-->
+<!--                    console.error(error);-->
+<!--                    alert("Something went wrong");-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--        $("#btn-login2").click(function () {-->
+<!--            $.ajax({-->
+<!--                url: "http://localhost:8080/api/v1/auth/authenticate",-->
+<!--                method: "POST",-->
+<!--                contentType: "application/json",-->
+<!--                data: JSON.stringify({-->
+<!--                    "email": $("#emailSignIn").val(),-->
+<!--                    "password": $("#passwordSignIn").val()-->
+<!--                }),-->
+<!--                success: (res) => {-->
+<!--                    console.log(res.data.token);-->
+<!--                    console.log(res.data.role)-->
+<!--                    window.localStorage.setItem("token", res.data.token);-->
+<!--                    if (res.data.role === "USER") {-->
+<!--                        window.location.href = "index.html";-->
+<!--                        console.log("Login successful");-->
+<!--                        alert("Login successful");-->
+<!--                    } else {-->
+<!--                        window.location.href = "adminDashboard.html";-->
+<!--                    }-->
+<!--                },-->
+<!--                error: (error) => {-->
+<!--                    console.error(error);-->
+<!--                    alert("Something went wrong");-->
+<!--                }-->
+<!--            });-->
+<!--        })-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExploreLanka - Sign In & Sign Up</title>
+    <title>ExploreLanka | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/login.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Dark overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .auth-container {
+            position: relative;
+            z-index: 2;
+            background: #fff;
+            padding: 60px 50px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease forwards;
+            border: 2px solid #e1b12c;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px 20px;
+            margin: 15px 0;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            background: #f7f7f7;
+            font-size: 16px;
+            font-weight: 400;
+            transition: all 0.4s ease;
+        }
+
+        input:focus {
+            border-color: #e1b12c;
+            background: #fff;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: #e1b12c;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 15px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d4a10b;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .switch-text span {
+            color: #e1b12c;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .switch-text span:hover {
+            text-decoration: underline;
+        }
+
+        /* Add smoother input focus and button animations */
+        input:focus, .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Make the form responsive on smaller screens */
+        @media (max-width: 480px) {
+            .auth-container {
+                padding: 40px 30px;
+                max-width: 400px;
+            }
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 <body>
-<!--<header id="home">-->
-<!--    <nav>-->
-<!--        <div class="nav__bar">-->
-<!--            <div class="nav__logo"><a href="#">ExploreLanka 🌍</a></div>-->
-<!--            <ul class="nav__links">-->
-<!--                <li class="link"><a href="#home">Home</a></li>-->
-<!--                <li class="link"><a href="#about">About Us</a></li>-->
-<!--                <li class="link"><a href="#discover">Discover</a></li>-->
-<!--                <li class="link"><a href="#blog">Blog</a></li>-->
-<!--                <li class="link"><a href="#journals">Journals</a></li>-->
-<!--                <li class="link"><a href="#gallery">Gallery</a></li>-->
-<!--                <li class="link"><a href="#contact">Contact</a></li>-->
-<!--                <li class="link search">-->
-<!--                    <span><i class="ri-search-line"></i></span>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </nav>-->
-<!--</header>-->
 
 <div class="auth-container">
     <div class="auth-box">
 
         <form id="signInForm">
-            <h2>Sign In</h2>
-            <input id="emailSignIn" type="email" placeholder="Email" required>
-            <input  id="passwordSignIn" type="password" placeholder="Password" required>
-            <button class="btn" type="button"  id="btn-login2">Login</button>
+            <h2>Welcome to Explore Lanka</h2>
+            <input id="emailSignIn" type="email" placeholder="Email Address" required>
+            <input id="passwordSignIn" type="password" placeholder="Password" required>
+            <button class="btn" type="button" id="btn-login2">Sign In</button>
             <p class="switch-text">Don't have an account? <span onclick="showSignUp()">Sign Up</span></p>
         </form>
 
         <form id="signUpForm" style="display: none;">
-            <h2>Sign Up</h2>
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit" class="btn">Register</button>
+            <h2>Create Account</h2>
+            <input id="nameSignUp" type="text" placeholder="Full Name" required>
+            <input id="emailSignUp" type="email" placeholder="Email Address" required>
+            <input id="passwordSignUp" type="password" placeholder="Create Password" required>
+            <button type="button" class="btn" id="sign-up-btn2">Register</button>
             <p class="switch-text">Already have an account? <span onclick="showSignIn()">Sign In</span></p>
         </form>
+
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="js/login.js"></script>
 <script>
+    function showSignUp() {
+        $("#signInForm").hide();
+        $("#signUpForm").show();
+    }
+
+    function showSignIn() {
+        $("#signUpForm").hide();
+        $("#signInForm").show();
+    }
+
     $(document).ready(function () {
         $("#sign-up-btn2").click(function () {
-
             let username = $("#nameSignUp").val().trim();
             let email = $("#emailSignUp").val().trim();
             let password = $("#passwordSignUp").val().trim();
@@ -75,11 +301,12 @@
                     "role": "USER"
                 }),
                 success: (res) => {
-                    console.log("sgdhfjk    "+res.data.token);
+                    console.log(res.data.token);
                     window.localStorage.setItem("token", res.data.token);
                     if (res.message === "Success") {
                         console.log("Registration successful");
                         alert("Registration successful");
+                        showSignIn();
                     } else {
                         alert("Failed: " + (res.message || "Unknown error"));
                     }
@@ -90,6 +317,7 @@
                 }
             });
         });
+
         $("#btn-login2").click(function () {
             $.ajax({
                 url: "http://localhost:8080/api/v1/auth/authenticate",
@@ -101,7 +329,7 @@
                 }),
                 success: (res) => {
                     console.log(res.data.token);
-                    console.log(res.data.role)
+                    console.log(res.data.role);
                     window.localStorage.setItem("token", res.data.token);
                     if (res.data.role === "USER") {
                         window.location.href = "index.html";
@@ -116,9 +344,9 @@
                     alert("Something went wrong");
                 }
             });
-        })
+        });
     });
 </script>
+
 </body>
 </html>
-

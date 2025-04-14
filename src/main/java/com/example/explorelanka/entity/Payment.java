@@ -1,5 +1,7 @@
 package com.example.explorelanka.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,20 +24,20 @@ public class Payment  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking; // Foreign key reference to Booking entity
+    @JsonIgnore
+    @JsonBackReference
+    private Booking booking;
 
-    @Column(nullable = false)
-    private BigDecimal amount;
+    private double amount;
 
-    @Column(nullable = false)
-    private String paymentMethod; // e.g., "Credit Card", "PayPal"
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod method; // CREDIT_CARD, PAYPAL, BANK_TRANSFER
 
-    @Column(nullable = false)
-    private String paymentStatus; // e.g., "SUCCESS", "FAILED", "PENDING"
+    private LocalDateTime paymentDate;
 
-    @Column(nullable = false)
-    private LocalDateTime transactionDate;
-
+    public enum PaymentMethod {
+        CREDIT_CARD, PAYPAL, BANK_TRANSFER
+    }
 }

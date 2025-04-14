@@ -584,3 +584,37 @@ nav {
         justify-content: center;
     }
 }
+
+/* Floating WhatsApp Button */
+#whatsapp-btn {
+    position: fixed;
+    bottom: 25px; /* Adjust position from bottom */
+    right: 25px; /* Adjust position from the right */
+    background-color: #25D366; /* WhatsApp green */
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for elevation */
+    color: #fff;
+    font-size: 10px; /* Adjust icon size */
+    transition: all 0.3s ease;
+    z-index: 1000; /* Ensure the button is on top */
+}
+
+/* WhatsApp Icon Styling */
+#whatsapp-btn i {
+    font-size: 25px; /* Icon size */
+}
+
+/* Hover effect: scale and shadow for better interaction */
+#whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+}
+
+/* Mobile responsiveness (adjust position on smaller screens if needed) */
+@media (max-width: 768px) {
+    #whatsapp-btn {
+        bottom: 15px;
+        right: 15px;
+    }
+}

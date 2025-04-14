@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
+
 @Entity
 @Table(name = "bookings")
 public class Booking  {
@@ -29,8 +30,8 @@ public class Booking  {
     @ManyToOne
     @JoinColumn(name = "package_id", nullable = false)
     private TravelPackage travelPackage;
-    private String userName;
-    private String userEmail;
+//    private String userName;
+//    private String userEmail;
 
     private LocalDate travelDate;
     private int numberOfGuests;
