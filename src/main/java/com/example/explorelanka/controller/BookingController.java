@@ -56,6 +56,12 @@ public class BookingController {
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public ResponseEntity<ResponseDTO> save(@Valid @RequestBody BookingDTO bookingDTO) {
         System.out.println("boking save controller");
+
+//        if (bookingDTO.getUserEmail() == null || bookingDTO.getUserEmail().isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                    .body(new ResponseDTO(VarList.Bad_Request, "Email is required", null));
+//        }
+
         UserDTO userDto = userServiceImpl.findByEmail(bookingDTO.getUserEmail());
         if (userDto == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
