@@ -1,6 +1,6 @@
-# 🌴 ExploreLanka – Travel Service Platform for Sri Lanka
+# 🌴 ExploreLanka – Travel 
 
- Adavanced API Development_Final Coursework
+# Adavanced API Development_Final Coursework
 
 # 📌 Project Description 
 ExploreLanka is a comprehensive travel service platform designed to provide tourists with a seamless and enriched experience while exploring Sri Lanka. The website offers curated travel packages, real-time weather alerts and booking services to help users plan their journeys effortlessly.
@@ -10,10 +10,15 @@ With features like an interactive home page, user-friendly booking forms, a dedi
 # ✨ Key Features
 
 ✅ User Registration & Login: Secure access for both travelers and administrators.
+
 📦 Travel Packages: View detailed packages with destinations, duration, and prices.
+
 📅 Booking System: Book travel packages and guide vehicles in a few clicks.
+
 💳 Payment Tracking: Keep track of payment transactions.
+
 🌤️ Live Weather Alerts: Real-time weather updates for travel planning.
+
 📊 Admin Dashboard: Full backend control for managing users, bookings, and packages.
 
 # 🖼️ Screenshots 
