@@ -26,7 +26,7 @@ With features like an interactive home page, user-friendly booking forms, a dedi
 # 🏠 Home Page
 ![Screenshot (4)](https://github.com/user-attachments/assets/a9075c83-5e6b-43e5-a883-01143d6d7b8d)
 
-# 📦 Packages
+## 📦 Packages
 ![Screenshot (5)](https://github.com/user-attachments/assets/c1051e45-4b97-4357-aaeb-a93e21d5fb51)
 ![Screenshot (6)](https://github.com/user-attachments/assets/c5bef128-4801-4dd6-9eef-cc34cd702435)
 ![Screenshot (10)](https://github.com/user-attachments/assets/6acb6de3-2623-4727-adc3-996deebc9ca3)
