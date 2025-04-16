@@ -15,7 +15,9 @@ With features like an interactive home page, user-friendly booking forms, a dedi
 
 📅 Booking System: Book travel packages and guide vehicles in a few clicks.
 
-💳 Payment Tracking: Keep track of payment transactions.
+📧 Email Notifications: Automated confirmation emails sent to users after successful bookings or updates to their trips.
+
+💳 Payment: payment transactions.
 
 🌤️ Live Weather Alerts: Real-time weather updates for travel planning.
 
